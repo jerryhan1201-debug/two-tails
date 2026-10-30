@@ -1,0 +1,7 @@
+import type{DogRole}from'./save';
+export type RegionStepBack={regionId:string;x:number;y:number;z:number};
+export function validRegionStepBack(v:unknown):v is RegionStepBack{const p=v as RegionStepBack;return !!p&&typeof p==='object'&&!Array.isArray(p)&&Object.keys(p).every(k=>['regionId','x','y','z'].includes(k))&&typeof p.regionId==='string'&&/^[a-z0-9-]{1,100}$/.test(p.regionId)&&[p.x,p.y,p.z].every(n=>Number.isFinite(n)&&Math.abs(n)<2000);}
+export interface RegionLoad{id:number;from:string;to:string;arrival:{x:number;y?:number;z:number};advanceStory:boolean;ready:DogRole[];failed?:boolean}
+export interface RegionLoadCommand{id:number;result:'ready'|'failed'|'retry'|'cancel'}
+export function validRegionLoadCommand(v:unknown):v is RegionLoadCommand{const c=v as RegionLoadCommand;return !!c&&typeof c==='object'&&Object.keys(c).every(k=>['id','result'].includes(k))&&Number.isSafeInteger(c.id)&&c.id>0&&['ready','failed','retry','cancel'].includes(c.result);}
+export function validRegionLoad(v:unknown):v is RegionLoad{const p=v as RegionLoad;return !!p&&typeof p==='object'&&Number.isSafeInteger(p.id)&&p.id>0&&[p.from,p.to].every(x=>typeof x==='string'&&/^[a-zA-Z0-9_-]{1,100}$/.test(x))&&!!p.arrival&&Number.isFinite(p.arrival.x)&&Number.isFinite(p.arrival.z)&&(p.arrival.y===undefined||Number.isFinite(p.arrival.y))&&typeof p.advanceStory==='boolean'&&Array.isArray(p.ready)&&p.ready.length<=2&&new Set(p.ready).size===p.ready.length&&p.ready.every(x=>x==='gold'||x==='white')&&(p.failed===undefined||typeof p.failed==='boolean');}

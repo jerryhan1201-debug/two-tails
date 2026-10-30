@@ -1,0 +1,1 @@
+import{readFileSync}from'node:fs';import{registerStudioData}from'../src/studio-physics';import{STUDIO_RELEASES,studioAssetBase}from'../src/studio-regions';for(const[id,r]of Object.entries(STUDIO_RELEASES))registerStudioData(id,JSON.parse(readFileSync(`public${studioAssetBase(id)}physics.json`,'utf8')),JSON.parse(readFileSync(`public${studioAssetBase(id)}scene.json`,'utf8')));

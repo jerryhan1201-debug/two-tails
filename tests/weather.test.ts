@@ -1,0 +1,5 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {weatherAt} from '../src/world-weather';
+test('shared snapshot time deterministically gives a twelve-minute readable day/night and weather cycle',()=>{assert.equal(weatherAt(0,'village').hour,9);assert.deepEqual(weatherAt(155,'forest'),weatherAt(155,'forest'));assert.equal(weatherAt(720,'village').hour,9);assert(weatherAt(390,'village').daylight<.05);assert.equal(weatherAt(180,'forest').kind,'rain');assert.equal(weatherAt(480,'forest').kind,'snow');assert.equal(weatherAt(630,'forest').kind,'thunder');assert.equal(weatherAt(180,'ch06-mountain').kind,'snow');assert.equal(weatherAt(480,'ch07-dragon').kind,'rain');assert.equal(weatherAt(630,'mushroom-home',true).intensity,0);assert.equal(weatherAt(630,'mushroom-home',true).flash,0);});
+test('lightning has a single soft pulse per 37 seconds and bounded brightness',()=>{let starts=0,prior=false;for(let t=608;t<742;t+=.05){const w=weatherAt(t,'forest'),on=w.flash>0;assert(w.flash>=0&&w.flash<=.22);if(on&&!prior)starts++;prior=on;}assert(starts>=3&&starts<=4);});

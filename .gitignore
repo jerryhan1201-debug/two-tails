@@ -1,0 +1,16 @@
+node_modules/
+dist/
+coverage/
+artifacts/
+.wrangler/
+.game-data*/
+.env*
+!.env.example
+.dev.vars*
+*.log
+*.tsbuildinfo
+.DS_Store
+# Media and licensed model exports are intentionally absent from this source release.
+source-assets/
+public/assets/
+private/

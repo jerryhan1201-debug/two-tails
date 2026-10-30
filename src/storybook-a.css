@@ -1,0 +1,189 @@
+/* Approved A / 童话绘本, adapted to live game DOM. No preview state/controller. */
+@font-face{font-family:JourneySerif;src:url('/assets/ui/storybook-0.4.1/fonts/journey-serif.woff2') format('woff2');font-weight:200 900;font-display:swap}
+@font-face{font-family:JourneySans;src:url('/assets/ui/storybook-0.4.1/fonts/journey-sans.woff2') format('woff2');font-weight:100 900;font-display:swap}
+#app.storybook-a{font-family:JourneySerif,Goulai,"PingFang SC",serif;--face:#e3d9b6;--edge:#958975;--rim:#fff3d2;--mark:#334d58;--glyph-cut:var(--face);--glyph-tint:#bd7150;--a-ink:#21364bf0;--studio-ink:#253c47;--studio-paper:#f0ead6;--studio-button:#e7dfc7;--studio-stamp:#98493e}
+.storybook-a .a-frame{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 2px 2px #102b3640);pointer-events:none}
+.storybook-a .a-charm{position:relative;display:inline-grid;place-items:center;width:56px;height:56px;flex:none;color:var(--mark);transition:transform .16s}
+.storybook-a .a-charm>.ui-icon{position:relative;width:29px;height:29px;--glyph-cut:var(--face);--glyph-tint:var(--mark)}
+.storybook-a button:hover:not(:disabled)>.a-charm{transform:translateY(-2px)}
+#app.storybook-a .top-actions .a-control{position:relative}
+#app.storybook-a .top-actions .a-frame{height:100%}
+#app.storybook-a #mount,#app.storybook-a #flight-lift button{position:relative}
+#app.storybook-a #flight-status:empty{display:none}
+#app.storybook-a .title-menu{left:7.5%;top:12%;width:280px;max-width:none;padding:0;pointer-events:none}
+#app.storybook-a .title-menu h1{margin:0}
+#app.storybook-a .title-menu h1 img{width:100%;height:auto;margin:0}
+.storybook-a .title-flourish{display:flex;align-items:center;gap:12px;width:145px;margin:-14px 0 0 29px;color:#e5d2ad}
+.storybook-a .title-flourish .ui-icon{width:19px;height:19px;--glyph-cut:#21364b;--glyph-tint:#f1e4c4}
+.storybook-a .title-flourish .ui-icon:last-child{width:10px;height:10px}
+.storybook-a .title-flourish i{height:1px;background:#d5c3a687;flex:1}
+.storybook-a .a-home-modes{position:absolute;left:7.5%;top:41%;width:353px;display:grid;gap:20px;isolation:isolate;pointer-events:none}
+.storybook-a .a-home-mode{position:relative;min-width:0}
+.storybook-a .a-mode-start{position:relative;display:flex;align-items:center;gap:18px;width:100%;min-height:64px;text-align:left;padding:0 10px 0 0;border:0;background:none;color:#f4eddc;box-shadow:none}
+.storybook-a .a-mode-start strong{font-size:23px;font-weight:600;letter-spacing:.08em;line-height:1.4;padding:4px 12px 5px 2px;background:var(--a-ink);white-space:nowrap}
+.storybook-a .a-primary-mode .a-mode-start strong{font-size:26px;font-weight:700;background:none}
+.storybook-a .a-primary-mode .a-mode-start:before{content:'';position:absolute;inset:3px -4px 1px 26px;background:#98493e;mask:url('/assets/ui/storybook-0.4.1/ribbon-A.svg') center/100% 100% no-repeat;z-index:-1}
+.storybook-a .a-primary-mode .a-charm{--face:#f0e3c5;--mark:#733f37;--edge:#a36e54;--rim:#fff1ce}
+.storybook-a .a-home-mode:not(.a-primary-mode) .a-charm{width:48px;height:48px;margin:0 4px;--face:#d6ddd0;--edge:#6e8684;--mark:#345363;--rim:#f7eed7}
+.storybook-a .entry-arrow{width:22px;height:22px;margin-left:auto;opacity:0;color:#e2c495;--glyph-cut:#98493e}
+.storybook-a .a-primary-mode .entry-arrow,.storybook-a .a-mode-start:hover .entry-arrow,.storybook-a .a-mode-start:focus-visible .entry-arrow{opacity:1}
+.storybook-a .a-home-modes:before{content:'';position:absolute;left:27px;top:39px;bottom:70px;width:1px;background:#cbd0b973;z-index:-1}
+.storybook-a .a-continue{display:flex;align-items:center;gap:8px;font:13px JourneySans,Goulai,sans-serif;min-height:44px;margin-left:74px;padding:0 8px;background:none;color:#eee4cf;border:0;box-shadow:none;text-align:left}
+.storybook-a .a-continue>span{padding:4px 8px;background:var(--a-ink);border-radius:3px;max-width:100%}
+.storybook-a .a-continue small{display:block;font-size:10px;max-width:215px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.85}
+.storybook-a .a-continue>.ui-icon{width:16px;height:16px}
+.storybook-a .a-continue:hover>span{text-decoration:underline;text-underline-offset:4px}
+.storybook-a .a-story-links{display:flex;margin-left:66px;gap:0}
+.storybook-a .a-story-links .a-continue{margin-left:0;flex:none}
+.storybook-a .a-story-links small{max-width:135px}
+#app.storybook-a #topbar:not(.in-game){top:auto;left:auto;bottom:23px;right:var(--safe-r)}
+#app.storybook-a #topbar:not(.in-game)>.wordmark{display:none}
+#app.storybook-a .home-footer{left:7.5%;right:auto;bottom:23px;pointer-events:none}
+.storybook-a .home-footer .title-edition{display:none}
+#app.storybook-a .title-book{border:0;background:none;box-shadow:none;gap:12px;color:#f3e8ce;padding:0 8px;font-size:14px}
+.storybook-a .title-book span{padding:5px 7px;background:var(--a-ink);border-radius:3px}
+.storybook-a .title-book .ui-icon{--glyph-cut:#20364b;--glyph-tint:#e4b47b}
+#app.storybook-a .top-actions{gap:12px}
+#app.storybook-a .top-actions button{width:44px;height:44px;padding:0;background:none;border:0;box-shadow:none;backdrop-filter:none}
+.storybook-a .top-actions button>.ui-icon{position:relative;color:var(--mark);width:24px;height:24px}
+
+/* Live HUD. Decorative regions pass input through to the original look surface. */
+#app.storybook-a #hud{pointer-events:none}
+#app.storybook-a #hud .player-panel{top:max(25px,env(safe-area-inset-top));left:var(--safe-l);width:260px;min-height:64px;padding:0;gap:9px;border:0;background:none;box-shadow:none;backdrop-filter:none;pointer-events:none}
+.storybook-a .player-panel>div:last-child{flex:1;min-width:0}
+#app.storybook-a #hud .player-panel .avatar{width:55px;height:60px;flex:none;border:2px solid #edf0d8;border-radius:42% 46% 36% 40% /47% 35% 48% 30%;background:#d4d7bf;box-shadow:0 3px 0 #687d73}
+.storybook-a .player-panel .avatar:after{display:none}
+.storybook-a .avatar img{width:54px;height:54px;object-fit:contain}
+.storybook-a .player-line{display:flex;flex-wrap:wrap;align-items:center;gap:3px 8px;padding:4px 8px;border-left:2px solid #dcb777;border-radius:0 5px 2px 0;background:var(--a-ink)}
+#app.storybook-a #hud .player-panel :is(strong,span){color:#f3eedc}
+.storybook-a .player-line strong{font-size:14px;white-space:nowrap}
+.storybook-a #role-label{font:10px JourneySans,Goulai,sans-serif;margin-left:auto}
+.storybook-a .health{width:100%;height:7px;border:1px solid #c9d7c7;border-radius:2px;background:#273b4a;margin:5px 1px 3px}
+.storybook-a .health i{background:#b5d9b1}
+.storybook-a .player-panel[data-health=low] .health i{background:#dd846b}
+.storybook-a .partner-line{display:flex;flex-wrap:wrap;gap:3px;font:10px JourneySans,Goulai,sans-serif}
+.storybook-a .partner-line span{background:var(--a-ink);padding:2px 5px;border-radius:3px}
+.storybook-a .a-place{position:absolute;left:50%;top:max(25px,env(safe-area-inset-top));transform:translateX(-50%);display:grid;justify-items:center;gap:4px;max-width:34vw;pointer-events:none}
+.storybook-a .a-place span{background:var(--a-ink);color:#f3eedc;padding:5px 11px;border-radius:4px;text-align:center;font-size:14px;line-height:1.35}
+.storybook-a .a-place #mode-label{font:10px JourneySans,Goulai,sans-serif;padding:3px 7px}
+#app.storybook-a .game-top-actions{top:max(19px,env(safe-area-inset-top));right:var(--safe-r);pointer-events:auto}
+#app.storybook-a .game-top-actions button{display:flex;width:auto;height:56px;gap:7px;padding:0;border:0;background:none;box-shadow:none;backdrop-filter:none;color:#f4efd9}
+.storybook-a .game-top-actions button>span:last-child{background:var(--a-ink);padding:4px 7px;font-size:12px;border-radius:3px}
+.storybook-a .game-top-actions .a-charm{width:50px;height:50px}
+#app.storybook-a #hud .quest-panel{position:absolute;top:95px;right:var(--safe-r);left:auto;transform:none;width:240px;max-width:30vw;background:none;border:0;box-shadow:none;padding:0;pointer-events:auto;backdrop-filter:none}
+#app.storybook-a #hud .quest-panel summary{min-height:44px;gap:7px;padding:5px 9px;background:var(--a-ink);border-radius:5px 3px 8px 4px;color:#f4efda;font-size:12px}
+#app.storybook-a #hud .quest-panel summary .ui-icon{width:16px;height:16px;transform:rotate(90deg)}
+.storybook-a .quest-panel[open] summary .ui-icon{transform:rotate(-90deg)}
+#app.storybook-a .quest-details{background:#f0ead6f5;padding:10px;border-radius:4px 5px 13px 6px;color:#253c47}
+.storybook-a .quest-details h3{font-size:13px;line-height:1.65;margin:0}
+#app.storybook-a .minimap{display:none}
+#app.storybook-a #weather-status{top:97px;left:var(--safe-l);right:auto;transform:none;width:max-content;border:0;border-radius:3px;background:var(--a-ink);color:#f3eedc;box-shadow:none;padding:3px 7px;font:11px JourneySans,Goulai,sans-serif;pointer-events:none}
+#app.storybook-a #mouse-control{top:78px;max-width:200px;background:var(--a-ink);color:#f3eedc;border:0;font:11px JourneySans,Goulai,sans-serif;border-radius:7px 3px 10px 4px}
+#app.storybook-a .world-actions{top:137px;left:var(--safe-l);max-width:200px;gap:5px;pointer-events:none}
+#app.storybook-a .world-actions button{border:1px solid #aca38b;background:#ece3cdee;color:#253c47;border-radius:9px 4px 13px 5px;min-height:44px;box-shadow:0 2px #273e4938}
+#app.storybook-a .world-actions :is(#duo-status,#pet-status){font:11px JourneySans,Goulai,sans-serif;background:var(--a-ink);color:#f3eedc;border-radius:3px;line-height:1.6;padding:3px 6px;pointer-events:none}
+.storybook-a #pet-status:empty{display:none}
+#app.storybook-a #hud .connection-line{background:var(--a-ink);color:#f3eedc;border:0;box-shadow:none;font:10px JourneySans,Goulai,sans-serif;pointer-events:none}
+#app.storybook-a :is(#interaction-prompt,#toast){background:var(--a-ink);color:#f3eedc;border:0;border-radius:5px 3px 8px 4px;box-shadow:none}
+
+/* Frames sit inside rectangular controls; do not mask hit targets or cooldown text. */
+#app.storybook-a :is(.action-pad button,#sprint,.ping,#mount,#flight-lift button,#interact){background:transparent!important;border:0!important;box-shadow:none;border-radius:0;color:var(--mark)!important;backdrop-filter:none}
+#app.storybook-a .a-control>.ui-icon,#app.storybook-a .a-control>span{position:relative}
+#app.storybook-a .a-control .ui-icon{--glyph-cut:var(--face);--glyph-tint:var(--mark)}
+#app.storybook-a .action-pad .attack{--face:#a85843;--mark:#fff0d4;--edge:#6b382b;--rim:#e3b080}
+#app.storybook-a .action-pad .skill-one{--face:#dbbe87;--mark:#533e2e;--edge:#93816a;--rim:#f5e6c3}
+#app.storybook-a .action-pad .skill-two{--face:#abc2ca;--mark:#254e64;--edge:#718f9b;--rim:#dfecdc}
+#app.storybook-a .a-control.held,#app.storybook-a #sprint[aria-pressed=true],#app.storybook-a #mount[aria-pressed=true]{--face:#cba873;--edge:#735439;background:transparent!important;box-shadow:none}
+body.keyboard-input #app.storybook-a .action-pad{left:auto;right:var(--safe-r);bottom:75px;transform:none;width:auto;height:56px;gap:7px}
+body.keyboard-input #app.storybook-a #hud:not([data-context="flight"]) .action-pad{display:flex;pointer-events:auto}
+body.keyboard-input #app.storybook-a #hud:not([data-context="flight"]) .action-pad :is(.attack,.dodge,.skill){display:grid}
+body.keyboard-input #app.storybook-a #more-actions{display:none}
+body.keyboard-input #app.storybook-a .action-pad button{width:54px;height:58px;padding:5px 4px 17px}
+body.keyboard-input #app.storybook-a .action-pad .attack{order:2;width:58px}
+body.keyboard-input #app.storybook-a .action-pad .dodge{order:3}
+body.keyboard-input #app.storybook-a .action-pad .jump{order:4}
+body.keyboard-input #app.storybook-a [data-key]:after{color:#f4efda;bottom:-6px;font:10px JourneySans,Goulai,sans-serif;inset-inline:9px;padding:1px 3px;border-radius:3px;background:var(--a-ink)}
+body.keyboard-input #app.storybook-a .a-control .a-frame{height:50px}
+body.keyboard-input #app.storybook-a #flight-controls{left:auto;right:var(--safe-r);bottom:18px;gap:8px;align-items:center}
+body.keyboard-input #app.storybook-a #flight-controls button{width:48px;height:44px;padding:4px 3px 10px}
+body.keyboard-input #app.storybook-a #flight-controls #weapon-toggle{width:106px;min-width:106px;background:var(--a-ink)!important;color:#f3eedc!important;border:0!important;border-radius:5px 3px 8px 4px;box-shadow:none}
+body.keyboard-input #app.storybook-a #weapon-toggle:after{background:none}
+body.keyboard-input #app.storybook-a .ping{left:var(--safe-l);right:auto;bottom:20px;width:48px;height:50px}
+body.keyboard-input #app.storybook-a #hud .connection-line{bottom:22px;left:82px;max-width:280px}
+body.keyboard-input #app.storybook-a #flight-status{position:absolute;bottom:61px;right:0;max-width:280px;background:var(--a-ink);color:#f3eedc;padding:3px 6px;border-radius:4px;pointer-events:none}
+body.keyboard-input #app.storybook-a #flight-status:empty{display:none}
+body.keyboard-input #app.storybook-a #interaction-prompt{bottom:96px;max-width:40vw}
+body.keyboard-input #app.storybook-a .action-pad button.cooling:before{z-index:1;inset:3px 5px 10px;border-radius:7px;opacity:.38}
+body.keyboard-input #app.storybook-a .cooldown-value{z-index:2}
+
+/* Existing complete panels keep their real controls, scrolling and focus lifecycle. */
+#app.storybook-a #modal-layer .modal{border:1px solid #9b9480;border-radius:13px 5px 22px 7px /7px 21px 9px 18px;background:#f0ead6;box-shadow:4px 5px 0 #1b354c66;color:#253c47}
+#app.storybook-a #modal-layer .modal :is(button:not(.character-token),input,select){border-radius:7px 4px 11px 5px}
+#app.storybook-a #modal-layer .modal :is(input,select,.fine,.help-lines,.settings-row,.modal-subtitle){font-family:JourneySans,Goulai,"PingFang SC",sans-serif}
+#app.storybook-a #modal-layer .modal h2{font-weight:650;letter-spacing:.04em}
+#app.storybook-a #modal-layer output{color:#624932}
+#app.storybook-a #modal-layer .modal :is(.primary,.selected,[aria-pressed=true]){border-color:#98493e}
+#app.storybook-a .a-menu-links{display:grid;gap:3px}
+#app.storybook-a .a-menu-links button{display:flex;align-items:center;gap:12px;min-height:49px;text-align:left;background:none;border:0;border-bottom:1px solid #8192894d;box-shadow:none;padding:7px 3px}
+.storybook-a .a-menu-links .ui-icon{--glyph-cut:#f0ead6;--glyph-tint:#a4523b}
+#app.storybook-a #dialogue,#app.storybook-a #message{border-radius:13px 5px 22px 7px;background:#f0ead6;color:#253c47;border-color:#9b9480}
+#app.storybook-a :is(button,a,input,select,summary):focus-visible{outline:3px solid #307688;outline-offset:3px}
+
+@media(max-height:650px) and (orientation:landscape){
+ body.touch-input #app.storybook-a #more-actions{top:120px;bottom:auto}
+ #app.storybook-a .title-menu{top:10%;left:6%;width:180px}
+ .storybook-a .a-home-modes{left:34%;top:7%;width:300px;gap:6px}
+ .storybook-a .a-mode-start{min-height:52px;gap:12px}
+ .storybook-a .a-charm{width:46px;height:46px}
+ .storybook-a .a-home-mode:not(.a-primary-mode) .a-charm{width:40px;height:40px}
+ .storybook-a .a-mode-start strong{font-size:19px}
+ .storybook-a .a-primary-mode .a-mode-start strong{font-size:22px}
+ .storybook-a .a-continue{margin-left:59px;font-size:11px}
+ .storybook-a .a-story-links{margin-left:51px}
+ .storybook-a .a-continue small{max-width:172px}
+ .storybook-a .a-story-links small{display:none}
+ #app.storybook-a #hud .player-panel{top:14px;width:222px;left:16px}
+ .storybook-a .player-line strong{font-size:12px}
+ .storybook-a #role-label{font-size:9px}
+ .storybook-a .partner-line{font-size:9px}
+ .storybook-a .a-place{top:14px;max-width:30vw}
+ .storybook-a .a-place span{font-size:12px}
+ #app.storybook-a .game-top-actions{top:9px;right:16px}
+ #app.storybook-a #hud .quest-panel{top:70px;right:16px;width:205px;max-width:28vw}
+ #app.storybook-a #weather-status{top:88px;left:16px;font-size:10px}
+ #app.storybook-a .world-actions{top:118px;left:16px;max-width:150px;gap:3px}
+ #app.storybook-a .world-actions button{font-size:11px;padding:5px 8px}
+ #app.storybook-a .world-actions :is(#duo-status,#pet-status){font-size:9px;max-width:150px}
+ body.keyboard-input #app.storybook-a .action-pad{bottom:70px;gap:3px}
+ body.keyboard-input #app.storybook-a .action-pad button{width:46px}
+ body.keyboard-input #app.storybook-a #hud .connection-line{max-width:170px;font-size:9px;bottom:16px}
+ body.keyboard-input #app.storybook-a #interaction-prompt{bottom:75px;max-width:32vw;font-size:11px}
+ #app.storybook-a #topbar:not(.in-game),#app.storybook-a .home-footer{bottom:12px}
+}
+@media(max-height:410px) and (orientation:landscape){
+ .storybook-a .a-home-modes{top:4%;width:285px;gap:0}
+ .storybook-a .a-mode-start{min-height:49px}
+ .storybook-a .a-continue{min-height:44px}
+ .storybook-a .a-continue small{display:none}
+ .storybook-a .title-flourish{margin-top:-8px}
+}
+@media(orientation:portrait) and (max-width:700px){
+ #app.storybook-a .title-menu{top:9%;left:8%;width:210px}
+ .storybook-a .a-home-modes{top:35%;left:8%;width:84%;max-width:353px;gap:14px}
+ #app.storybook-a .home-footer{left:6%;bottom:22px}
+}
+/* The cold-load panel must intercept input until main.ts installs its handlers. */
+#app.storybook-a #loading{pointer-events:auto}
+
+/* Direct map access keeps the existing illustrated control and hit target. */
+#app.storybook-a .game-top-actions .hud-map{min-width:50px;min-height:50px}
+@media(max-width:620px){#app.storybook-a .game-top-actions button>span:last-child:not(.a-charm){display:none}#app.storybook-a .game-top-actions{gap:6px}}
+
+/* Keep the new map charm clear of the narrow window's player card. */
+@media(max-width:620px){
+ #app.storybook-a .game-top-actions .hud-map{position:absolute;right:0;top:126px}
+ body.keyboard-input #app.storybook-a #interaction-prompt{bottom:168px;max-width:calc(100vw - 48px)}
+}
+@media(max-width:620px){#app.storybook-a .game-top-actions{display:flex}}
+
+body.keyboard-input #app.storybook-a #hud[data-context=swim] #flight-status{top:auto;bottom:132px;right:0;max-width:310px;line-height:1.5;padding:5px 8px}

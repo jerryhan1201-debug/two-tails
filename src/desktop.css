@@ -1,0 +1,65 @@
+/* Selected ui-0.3.0 skin, compact controls driven by the last real input source. */
+#mouse-control{position:absolute;left:50%;top:18px;transform:translateX(-50%);pointer-events:auto;min-height:44px;padding:8px 14px;font-size:12px;border-radius:4px;max-width:240px;color:#273d35;background:#f5efd9;border:1px solid #9b967c}
+#region-loading{position:fixed;inset:0;z-index:999;background:#163a32ed;color:#fff;display:flex;align-items:center;justify-content:center;gap:20px;font:18px system-ui}
+#region-loading button{min-height:44px;padding:10px 24px}
+body.touch-input #mouse-control,body.mouse-locked #mouse-control{display:none}
+body.mouse-locked #look-zone{cursor:none}
+#home .hero-buttons{gap:8px}
+@media(max-height:700px){#home .title-menu{padding-top:16px;padding-bottom:64px}#home .title-menu h1{margin:8px 0}#home .title-invitation{margin:4px 0 10px}#home .hero-buttons button{min-height:44px;padding-top:8px;padding-bottom:8px}}
+body.keyboard-input #joystick,body.keyboard-input #sprint,body.keyboard-input #interact,body.keyboard-input .controls-help{display:none!important}
+body.keyboard-input #look-zone{inset:0;z-index:0;outline:0;cursor:default}
+body.keyboard-input #hud>:not(#look-zone){z-index:2}
+body.keyboard-input #app .action-pad{left:50%;right:auto;bottom:max(22px,env(safe-area-inset-bottom));transform:translateX(-50%);width:298px;height:56px;display:flex;gap:6px;align-items:center}
+body.keyboard-input #app .action-pad button,body.keyboard-input #app #flight-controls button,body.keyboard-input #app .ping{position:relative;inset:auto;width:54px;height:56px;min-height:44px;flex:none;border-radius:4px;gap:0;padding:3px 4px 17px;backdrop-filter:none}
+body.keyboard-input #app .action-pad .attack{order:-2;width:58px;border-radius:4px}
+body.keyboard-input #app .action-pad .dodge{order:3}
+body.keyboard-input #app .action-pad .jump{order:4}
+body.keyboard-input #app :is(.action-pad button,#flight-controls button,.ping) .ui-icon{width:26px;height:26px;transform:none;filter:none}
+body.keyboard-input #app [data-key]:after{content:attr(data-key);display:block;position:absolute;left:0;right:0;top:auto;bottom:3px;text-align:center;font:11px/13px system-ui,sans-serif;letter-spacing:0;color:var(--studio-ink);background:none;border:0;box-shadow:none;transform:none;inset-inline:0;height:auto;width:auto;opacity:1;mask:none;-webkit-mask:none}
+body.keyboard-input #app .action-pad button:before{display:none}
+body.keyboard-input #app .action-pad button.cooling:before{display:block;inset:0;opacity:.28;border:0;border-radius:3px;box-shadow:none;background:conic-gradient(#443524 var(--cooldown),transparent 0);pointer-events:none}
+body.keyboard-input #app .cooldown-value{position:absolute;top:2px;right:3px;font:10px/13px system-ui,sans-serif;color:#fff;background:#473b30;border-radius:2px;padding:0 3px;z-index:1}
+body.keyboard-input #app .cooldown-value:empty{display:none}
+body.keyboard-input #app [aria-disabled=true]{opacity:.48}
+body.keyboard-input #app #flight-controls{left:max(20px,env(safe-area-inset-left));bottom:max(22px,env(safe-area-inset-bottom));gap:6px}
+body.keyboard-input #app #flight-lift{gap:6px}
+body.keyboard-input #app .ping{position:absolute;right:max(20px,env(safe-area-inset-right));bottom:max(22px,env(safe-area-inset-bottom));left:auto;top:auto}
+body.keyboard-input #interaction-prompt{bottom:98px;left:50%;transform:translateX(-50%);max-width:calc(100% - 40px);padding:8px 12px;display:flex;align-items:center;gap:9px;pointer-events:none}
+body.keyboard-input #interaction-prompt:before{content:'E';font:600 13px/21px system-ui,sans-serif;display:block;min-width:23px;text-align:center;background:#fff8e8;border:1px solid #998360;border-radius:3px}
+body.keyboard-input .game-top-actions button{width:44px;height:44px;min-height:44px}
+body.keyboard-input .game-top-actions{gap:6px}
+body.keyboard-input #app #toast{bottom:94px}
+body.keyboard-input #app .connection-line{bottom:86px;max-width:260px;flex-wrap:wrap}
+body.keyboard-input #app #flight-status{font-size:11px;max-width:250px;white-space:normal;width:max-content}
+body.keyboard-input #modal-layer .modal{max-height:calc(100dvh - 56px);overscroll-behavior:contain;scrollbar-gutter:stable}
+body.keyboard-input #modal-layer .modal.wide{width:min(1020px,calc(100vw - 80px))}
+body.keyboard-input #modal-layer.settings-view .modal{width:min(880px,calc(100vw - 80px))}
+body.keyboard-input #app :is(button,a,input,select,summary):focus-visible{outline:3px solid #307688;outline-offset:3px}
+body.keyboard-input #dialogue{max-width:800px;bottom:102px}
+@media(min-width:1100px){body.keyboard-input #modal-layer .help-lines{display:grid;grid-template-columns:1fr 1fr;gap:0 28px}body.keyboard-input #modal-layer .help-lines p{margin:8px 0;font-size:14px}}
+@media(max-width:800px){body.keyboard-input #app .action-pad{width:258px;gap:4px}body.keyboard-input #app .action-pad button{width:46px}body.keyboard-input #app .action-pad .attack{width:58px}body.keyboard-input #app #flight-controls button{width:44px}body.keyboard-input .game-top-actions{gap:3px}body.keyboard-input .game-top-actions button{width:40px}body.keyboard-input .minimap{top:78px}body.keyboard-input #app .connection-line{max-width:200px}}
+ .world-actions{position:absolute;left:20px;top:186px;display:flex;flex-direction:column;gap:6px;pointer-events:auto;max-width:200px}
+ .world-actions button{min-height:44px;padding:8px 12px;font-size:13px;color:#334639;background:#e9d8a7;border:1px solid #b9a67a;border-radius:5px;box-shadow:0 2px 8px #17271e26}
+ #duo-status{font-size:12px;color:#233c32;background:#f3ead7e8;border-radius:3px;padding:3px 5px}#duo-status:empty{display:none}
+ .modal-open .world-actions,.dialogue-open .world-actions{visibility:hidden}
+ @media(max-height:550px){.world-actions{top:114px;left:16px;max-width:155px}.world-actions button{font-size:12px}}
+
+/* Optional field activities use the existing controls and book. */
+#field-status{position:absolute;left:50%;top:88px;transform:translateX(-50%);max-width:min(640px,72vw);padding:9px 16px;border:1px solid #d4bc8190;border-radius:15px;background:#243f36eb;color:#f4e9cd;font-size:14px;text-align:center;pointer-events:none;box-shadow:0 5px 20px #112c2c20;}
+#field-curtain{position:fixed;inset:0;z-index:180;background:radial-gradient(ellipse at center,#344f46,#172a25);color:#eee5cc;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:36px;}
+#field-curtain[hidden],#field-status[hidden]{display:none;}
+#field-curtain strong{font-size:clamp(36px,8vw,74px);font-weight:500;}#field-curtain p{max-width:410px;line-height:1.9;}#field-curtain button{border:1px solid #cbb78b;padding:12px 24px;border-radius:24px;background:transparent;color:inherit;cursor:pointer;}
+.field-journal{padding:24px 32px;background:#ece4cf;border-radius:20px;margin-bottom:24px;color:#425247;line-height:1.8;}.field-journal h3{margin:4px 0 12px;}.field-journal summary{display:flex;gap:16px;justify-content:space-between;cursor:pointer;}.field-journal .book-journey{border-top:1px solid #b9b6977a;padding:12px 0;}
+@media(max-width:800px){#field-status{top:58px;max-width:70vw;font-size:11px;padding:6px 10px;}.field-journal{padding:16px;}}
+
+.studio-loading{position:fixed;inset:0;z-index:1200;display:flex;align-items:center;justify-content:center;gap:16px;background:rgba(23,43,38,.85);color:#f0e7ca;font:16px system-ui;backdrop-filter:blur(3px)}
+
+#app #flight-controls #weapon-toggle{width:92px;min-width:92px;border-radius:5px;font-size:12px;white-space:nowrap;padding:4px 6px}body.keyboard-input #app #flight-controls #weapon-toggle{padding-bottom:17px}
+
+#play-health{position:absolute;top:108px;left:50%;transform:translateX(-50%);padding:5px 12px;border-radius:14px;background:#263630c9;color:#fff;font-size:12px;pointer-events:none}
+
+/* A complete vector key letter is independent of system-font substitution. */
+#interaction-prompt .interaction-key{display:none}
+body.keyboard-input #interaction-prompt:before{display:none;content:none}
+body.keyboard-input #interaction-prompt .interaction-key{display:grid;place-items:center;flex:0 0 23px;width:23px;height:23px;padding:0;line-height:1;background:#fff8e8;color:#173b3a;border:1px solid #998360;border-radius:3px;text-shadow:none;overflow:visible}
+#interaction-prompt .interaction-key svg{display:block;width:12px;height:15px;overflow:visible}

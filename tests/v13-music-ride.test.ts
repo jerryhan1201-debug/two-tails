@@ -1,0 +1,21 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync,statSync} from 'node:fs';
+import {Simulation} from '../src/simulation';import {freshSave} from '../shared/save';import {rideAllowedInRegion} from '../shared/duo';import {regionGroundHeight,REGIONS,createRegionMovementWorld} from '../src/regions';import {MUSIC_CUES,musicForRegion,DEFERRED_MUSIC} from '../src/music-cues';
+function pair(mode:'adventure'|'coop-exploration',region='ch01-lantern-village'){
+ const s=new Simulation({...freshSave('v13-ride-'+mode),mode});if(region!==s.state.regionId){assert(s.requestTravel('gold',region));assert(s.respondTravel('white',true));}s.state.enemies=[];
+ for(const [role,x]of [['white',0],['gold',2]] as const){const z=region==='player-home-villa'?39:-10,y=regionGroundHeight(region,x,z);Object.assign(s.state.players[role],{x,y,z,yaw:0,safeX:x,safeY:y,safeZ:z,grounded:true,action:'idle',speed:0});}return s;
+}
+const invite=(s:Simulation,type:'ride'|'cuddle',role:'gold'|'white'='gold')=>s.command(role,{x:0,z:0,actions:[],duo:{kind:'invite',type}});
+test('home blocks ride for both roles and network modes, while cuddle still requires consent',()=>{
+ for(const mode of ['adventure','coop-exploration']as const){const s=pair(mode,'player-home-villa');assert.equal(rideAllowedInRegion(s.state.regionId),false);
+ for(const[x,y,z]of [[0,.26,39],[0,.3,10],[0,5.1,10],[0,-4.5,10],[-46,.26,-26]]){Object.assign(s.state.players.white,{x,y,z});Object.assign(s.state.players.gold,{x:x+2,y,z});invite(s,'ride');assert(!s.state.duo);invite(s,'ride','white');assert(!s.state.duo);}
+ Object.assign(s.state.players.white,{x:0,y:.26,z:39});Object.assign(s.state.players.gold,{x:2,y:.26,z:39});invite(s,'cuddle');assert.equal(s.state.duo?.phase,'invited');s.command('white',{x:0,z:0,actions:[],duo:{kind:'accept',id:s.state.duo!.id}});assert.equal(s.state.duo?.phase,'active');
+ }
+});
+test('outside-home ride remains immediate, gold controlled, safely cancellable by either dog and excluded from saves',()=>{
+ for(const mode of ['adventure','coop-exploration']as const)for(const canceller of ['white','gold']as const){const s=pair(mode),w=s.state.players.white,g=s.state.players.gold;invite(s,'ride');assert.equal(s.state.duo?.phase,'active');const at={x:w.x,z:w.z};for(let i=0;i<20;i++){s.command('white',{x:0,z:-1,actions:['jump']});s.tick(.02);}assert.equal(w.z,at.z);for(let i=0;i<25;i++){s.command('gold',{x:0,z:-1,actions:[]});s.tick(.02);}assert(Math.hypot(w.x-at.x,w.z-at.z)>.8);assert(Math.abs(g.y-w.y-1.28)<.001);
+ const saved=s.exportSave();assert(!(saved.world.snapshot as any)?.duo);const restored=new Simulation(saved);assert(!restored.state.duo);assert(restored.state.players.gold.grounded);
+ s.command(canceller,{x:0,z:0,actions:[],duo:{kind:'cancel',id:s.state.duo!.id}});assert(!s.state.duo);assert(g.grounded);assert(createRegionMovementWorld(s.state.regionId).isSafe?.(g.x,g.z,g.y,.66));
+ }
+});
+test('legacy active ride state at home terminates safely on the next tick',()=>{const s=pair('coop-exploration');invite(s,'ride');const d=structuredClone(s.state.duo!);const home=pair('coop-exploration','player-home-villa');home.state.duo={...d,regionId:home.state.regionId,anchor:{x:0,y:.26,z:39,yaw:0},origin:{white:{x:0,y:.26,z:39,yaw:0},gold:{x:2,y:.26,z:39,yaw:0}}};home.tick(.02);assert(!home.state.duo);assert(home.state.players.gold.grounded);});
+test('every installed region resolves to supplied music, and future assignments create no regions or runtime downloads',()=>{for(const r of REGIONS){const id=musicForRegion(r.id);assert(id in MUSIC_CUES);assert.equal(id,r.id==='player-home-villa'?'aquarius':r.id==='mushroom-grove'?'magic-forest':r.id==='ch05-candle-castle'?'castle':r.id==='studio-tideglass-cove'?'mermaid-bay':r.id==='studio-winter-lantern'?'snow':'childhood');}const manifest=JSON.parse(readFileSync('source-assets/music-v13/manifest.json','utf8'));assert.equal(manifest.tracks.filter((t:any)=>t.active).length,3);for(const cue of Object.values(MUSIC_CUES)){const p='public/'+cue.file;assert(statSync(p).size<2_000_000);assert.equal(readFileSync(p).subarray(4,8).toString(),'ftyp');}assert.equal(DEFERRED_MUSIC.length,1);assert.equal(DEFERRED_MUSIC.filter(t=>!t.asset).length,1);assert.equal(manifest.tracks.find((t:any)=>t.id==='twilight').status,'pending playable audio');});

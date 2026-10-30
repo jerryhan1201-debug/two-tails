@@ -1,0 +1,53 @@
+/* ui-0.3.0 visual adapter. Real game DOM, events and responsive input regions stay authoritative. */
+@font-face{font-family:GoulaiBook;src:url('/assets/ui/studio-0.3.0/fonts/goulai-book-serif.woff2') format('woff2');font-display:swap}
+@font-face{font-family:GoulaiLatin;src:url('/assets/ui/studio-0.3.0/fonts/goulai-story-latin.woff2') format('woff2');font-display:swap}
+:root{--studio-ink:#493822;--studio-muted:#705538;--studio-edge:#98713d;--studio-stamp:#9e4e34;--studio-texture:url('/assets/ui/studio-0.3.0/parchment.svg');--studio-paper:var(--studio-texture),radial-gradient(ellipse at 50% 42%,#f4e2b4,#ecd39b 62%,#d3b273);--studio-button:var(--studio-texture),linear-gradient(100deg,#dec087,#f0dca8 23%,#e8ce94 76%,#d5b274)}
+#app,#app button,#app input,#app select{font-family:GoulaiLatin,GoulaiBook,'Noto Serif SC',serif;letter-spacing:0}
+#app *{letter-spacing:0}
+.title-landscape,.title-cast #game{background-image:url('/assets/ui/studio-0.3.0/lantern-path.png')}
+.title-shade{background:linear-gradient(90deg,#061a32ad,transparent 63%),linear-gradient(0deg,#07162d80,transparent 28%)}
+.title-menu{width:320px;max-width:38vw}.title-menu h1 img{width:218px;filter:none}.title-chapter{margin-left:0;color:#d9e0e9}.title-invitation{color:#e5e8ee}
+#app .title-menu .hero-buttons button,#app .top-actions button,#app .game-top-actions button,#app .modal button:not(.character-token),#app .dialogue-footer button{background:var(--studio-button);color:var(--studio-ink);border:1px solid var(--studio-edge);border-radius:2px;box-shadow:inset 0 1px #fff0bfa0,inset 0 -2px #9a743532,0 2px 4px #06162d30;text-shadow:none}
+#app .title-menu .hero-buttons button{min-height:48px;padding:10px 16px;transform:none;gap:12px}
+#app .title-menu .continue>span{color:var(--studio-ink)}
+#app .title-menu .start-adventure,#app .modal button.primary{box-shadow:inset 4px 0 var(--studio-stamp),inset 0 1px #fff0bfaa,0 2px 5px #07162d4d}
+#app .title-menu .hero-buttons small{color:var(--studio-muted);font-size:12px}.together-actions{gap:8px;padding:0}.together-actions button{flex:1;white-space:normal}
+#app button:focus-visible,#app summary:focus-visible,#app input:focus-visible{outline:3px solid #5b351d;outline-offset:3px}
+#app button:disabled{opacity:.65;cursor:not-allowed}
+#app .title-menu .hero-buttons button:active,#app .modal button:active{box-shadow:inset 0 2px 5px #6a461c55;transform:translateY(1px)}
+#modal-layer{background:#07162da3;backdrop-filter:blur(2px)}
+#modal-layer .modal{background:var(--studio-paper);color:var(--studio-ink);border:1px solid var(--studio-edge);border-radius:4px;box-shadow:0 18px 64px #04132980,inset 0 0 24px #a8753426}
+#modal-layer :is(h2,h3,h4,strong,.modal-eyebrow,.modal-subtitle,.fine,.setting-row,.setting-command,.setting-help,.control-pairs,.control-pairs dt,.control-pairs dd,.settings-pages h3,.setting-tip,.save-mode,.settings-bottom .quiet){color:var(--studio-ink)}
+#modal-layer :is(input,select){color:var(--studio-ink);background:#f8e8b7;border-color:#aa8854;accent-color:var(--studio-stamp)}
+#modal-layer :is(.role-card,.chapter-entry,.equipment-item){background:var(--studio-button);color:var(--studio-ink);border-color:#a58655;border-radius:4px}
+#modal-layer :is(.selected,[aria-pressed=true]){border-color:var(--studio-stamp);color:#753c26;box-shadow:inset 3px 0 var(--studio-stamp)}
+#modal-layer.character-view{background:linear-gradient(90deg,transparent 30%,#07162d33 57%,#07162d9c);backdrop-filter:none}
+#modal-layer.character-view .modal{padding:22px;max-width:40vw;width:336px;overflow:auto}
+.character-view .modal>h2{font-size:16px}.character-callout h3{font-size:34px}.character-callout p{font-size:14px;color:var(--studio-muted)}
+.character-token,.character-mode-note,.character-view .preview-turn{color:var(--studio-ink)}
+.portrait-medallion{background:#ead2a0;border-color:#a7885b;box-shadow:none}.character-token.selected .portrait-medallion{background:#f4e3b4;border-color:var(--studio-stamp);box-shadow:none}
+#modal-layer.journal-view .modal{padding:18px 22px 14px;overflow:auto}.book-binding{border-color:#9b713f;background:#e1c58b;box-shadow:none;border-radius:3px}.book-spread{background:var(--studio-paper)}
+.book-scene{color:var(--studio-ink);background:#d5b87c24}.book-scene h3,.book-page h4,.book-page p,.book-scene p,.page-tabs button,.book-journey summary{color:var(--studio-ink)}
+.book-bottom{color:var(--studio-muted)}.page-tabs{margin-bottom:18px}.chapter-ribbons button{border-radius:2px}.book-route .done{background:#47756a;border-color:#47756a}.book-route .now{color:var(--studio-stamp)}
+#dialogue{background:var(--studio-paper);color:var(--studio-ink);border:1px solid #96703e;border-top:3px solid #ad8150;border-radius:3px;box-shadow:0 8px 20px #06162d50}
+.dialogue-copy>strong{background:#dfc38d;color:var(--studio-ink)}.dialogue-copy>p{color:var(--studio-ink)}
+#app :is(.player-panel,.quest-panel,#message,#toast,#weather-status,.connection-line,#interaction-prompt){background:var(--studio-paper);color:var(--studio-ink);border:1px solid #98713d85;border-radius:3px;box-shadow:0 2px 7px #07162d35}
+.quest-panel summary,.quest-details>span,.quest-details h3,.quest-details button,.player-panel :is(strong,span),#message p{color:var(--studio-ink)}
+.health{background:#ae9469}.health i{background:#699677}.player-panel .avatar{background:#d7bc85;border-color:#9e7b45}
+#app :is(.action-pad button,#sprint,.ping,#flight-controls button,#interact){background:var(--studio-button)!important;color:var(--studio-ink)!important;border:1px solid #98713d!important;border-radius:8px;box-shadow:inset 0 1px #fff0bf9c,0 2px 5px #07162d40;transform:none}
+#app .action-pad .attack{border-radius:50%;border:2px solid var(--studio-stamp)!important;box-shadow:inset 0 0 0 4px #9e4e3420,0 2px 5px #07162d40}
+#app .action-pad .ui-icon,#app #sprint .ui-icon,#app .ping .ui-icon,#app #flight-controls .ui-icon,#app #interact .ui-icon,#app .game-top-actions .ui-icon{filter:none;transform:none}
+#app :is(.action-pad button,#sprint,.ping,#flight-controls button,#interact).held,#app #sprint[aria-pressed=true],#app #mount[aria-pressed=true]{background:var(--studio-texture),#d7ac70!important;box-shadow:inset 0 2px 7px #6845236b}
+.action-pad .skill::after{background:conic-gradient(#8e603c var(--cooldown,0deg),transparent 0)}
+#joystick{background:#dcc48c12;border-color:#eddaa768;box-shadow:inset 0 0 0 19px #e6cd9210}#knob{background:var(--studio-texture),#dfc58ea6;border-color:#b88f4bb3;box-shadow:none}
+#story-reader{position:absolute;inset:0;z-index:90;pointer-events:auto;background:#061329d9;display:grid;place-items:center;padding:max(18px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(18px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left));touch-action:pan-y}
+.story-sheet{width:min(1100px,100%);height:min(760px,100%);max-height:100%;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:var(--studio-paper);border:1px solid #98713d;color:var(--studio-ink);box-shadow:0 14px 64px #020d1d88;overflow:hidden}
+.story-sheet header{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 24px;border-bottom:1px solid #98713d50;font-size:18px}.story-sheet header small{font-size:13px;white-space:nowrap}
+.story-body{min-height:0;display:flex;flex-direction:column;align-items:center;overflow:auto;padding:16px 24px;gap:12px}.story-art{min-height:0;max-height:calc(100% - 90px);max-width:100%;width:100%;object-fit:contain;flex:1}
+.story-copy{max-width:740px;width:100%;flex:none;text-align:center}.story-copy p{font-size:22px;line-height:1.8;margin:0;white-space:pre-line}.parchment .story-body{justify-content:center}.parchment .story-copy p{font-size:25px;line-height:2}.story-copy .story-objective{font-size:16px;line-height:1.7;border-top:1px solid #98713d66;padding-top:15px;margin-top:22px;color:#79412e}
+.story-sheet footer{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 22px;border-top:1px solid #98713d55;min-height:70px}.story-sheet footer>span{font-size:13px;line-height:1.5}.story-actions{display:flex;gap:10px;flex:none}.story-sheet button{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--studio-button);color:var(--studio-ink);border:1px solid #98713d;min-height:44px;min-width:44px;padding:8px 14px;border-radius:2px}.story-sheet button[data-story=prev] .ui-icon{transform:rotate(180deg)}
+.story-open #hud,.story-open #topbar{pointer-events:none;visibility:hidden}
+@media(max-height:500px) and (orientation:landscape){#story-reader{padding:10px 16px}.story-sheet header{padding:8px 15px;font-size:15px}.story-body{padding:9px 16px;gap:8px}.story-art{max-height:calc(100% - 53px)}.story-copy p{font-size:16px;line-height:1.6}.parchment .story-copy p{font-size:18px;line-height:1.9}.story-copy .story-objective{font-size:13px;margin-top:10px;padding-top:8px}.story-sheet footer{min-height:58px;padding:6px 14px;gap:8px}.story-sheet footer>span{font-size:11px}.story-actions{gap:6px}.story-sheet button{padding:6px 10px;font-size:13px}}
+@media(max-height:650px) and (orientation:landscape){.title-menu{width:284px;max-width:40vw}.title-menu h1 img{width:154px}#app .title-menu .hero-buttons button{padding:7px 11px;min-height:44px}#app .title-menu .hero-buttons small{font-size:10px}#modal-layer.character-view .modal{padding:12px 18px;width:300px;max-width:43vw}.character-callout h3{font-size:27px}#modal-layer.journal-view .modal{padding:12px 16px}.book-spread{min-height:230px}.book-scene h3{font-size:19px}}
+@media(max-height:430px) and (orientation:landscape){.title-menu h1 img{width:118px}.title-menu .hero-buttons{margin-top:7px;gap:5px}.title-chapter{font-size:10px}.title-menu{top:12px}#app .title-menu .hero-buttons button{padding:5px 10px}.title-menu .start-adventure small{display:none}#modal-layer.character-view .modal{padding-top:12px}.character-view .modal>h2{margin-bottom:6px}.character-callout h3{font-size:25px}.character-callout p{margin-bottom:8px}}
+@media(orientation:portrait) and (max-width:700px){#modal-layer.character-view .modal{max-width:100%;width:100%;padding:14px}.title-menu{max-width:none;width:84vw}.title-menu h1 img{width:180px}}

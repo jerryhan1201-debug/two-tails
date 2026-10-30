@@ -1,0 +1,89 @@
+/* Forest adventure controls: enamel charms, carved frames, and tactile states. */
+:root{--control-edge:#654b30;--control-light:#f9e3ac;--control-shadow:#162e35}
+.action-pad{opacity:1;filter:drop-shadow(0 4px 4px #11252750)}
+.action-pad:before{content:'';position:absolute;right:16px;top:24px;width:173px;height:138px;border:2px solid #c8ae7366;border-left-color:transparent;border-bottom-color:#365d5266;border-radius:70% 40% 60% 32%;transform:rotate(-25deg);box-shadow:inset 0 2px #fff0b920;pointer-events:none}
+.action-pad button,#sprint,.ping,#flight-controls button,#interact,.game-top-actions button{isolation:isolate;backdrop-filter:none;border:2px solid #a58c5d;color:#fff1c8;box-shadow:0 4px 0 #19323c,inset 0 2px 1px #fff3c066,inset 0 -4px 4px #102b3877,0 6px 10px #102a3b55;transition:transform .1s,filter .15s,box-shadow .1s;background:linear-gradient(145deg,#6b9586,#315b5c 58%,#274452)}
+.action-pad button:before,#sprint:before,.ping:before,#flight-controls button:before,#interact:before,.game-top-actions button:before{content:'';position:absolute;inset:5px;border:1px solid #f7e4b547;border-bottom-color:#132f3980;border-radius:inherit;box-shadow:inset 0 1px #e9edc72b;pointer-events:none;z-index:-1}
+.action-pad button .ui-icon,#sprint .ui-icon,.ping .ui-icon,#flight-controls .ui-icon,#interact .ui-icon,.game-top-actions .ui-icon{filter:drop-shadow(0 2px 0 #193642aa);stroke-width:2;overflow:visible}
+.action-pad .attack{border:3px solid #694b32!important;border-radius:40% 42% 48% 33% / 35% 40% 50% 52%;background:radial-gradient(ellipse at 30% 18%,#fff6cce6,transparent 45%),repeating-linear-gradient(130deg,transparent 0 17px,#96642013 17px 18px),linear-gradient(145deg,#e7bf75,#d69b4f 65%,#ae6934)!important;color:#513e29!important;box-shadow:0 5px 0 #4d382b,0 0 0 2px #e6cb8a88,inset 0 3px 1px #fff7ca,inset 0 -6px 6px #97672e66,0 9px 12px #12263370;transform:rotate(-8deg)}
+.action-pad .attack:before{inset:6px;border:1px solid #fff2cba6;border-bottom-color:#986b3c;box-shadow:inset 0 2px #fef4c647}
+.action-pad .attack .ui-icon{transform:rotate(8deg);filter:drop-shadow(0 1px 0 #fff4c4);width:43px;height:43px;stroke-width:2.4}
+.action-pad .skill{border-radius:21% 21% 38% 38%;border:2px solid #c6b48a;background:radial-gradient(ellipse at 32% 20%,#ffe3b580,transparent 50%),linear-gradient(145deg,#cb906c,#8b5146 72%,#563d44);box-shadow:0 4px 0 #3f3334,0 0 0 2px #25383b,inset 0 3px #ffe8ba66,inset 0 -5px 4px #4c323966}
+.action-pad .skill-two{background:radial-gradient(ellipse at 32% 20%,#e8f3a17d,transparent 50%),linear-gradient(145deg,#83a98c,#3d7067 70%,#2e4655);box-shadow:0 4px 0 #203e43,0 0 0 2px #263b3b,inset 0 3px #e7edbe80,inset 0 -5px 4px #234a5266}
+.action-pad .skill:before{inset:4px;border-radius:inherit;border:1px solid #f9e5b77a;border-bottom-width:3px}
+.action-pad .skill::after{inset:0;border-radius:inherit;background:conic-gradient(#ffe2a0 var(--cooldown,0deg),transparent 0);mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3px))}
+.skill.cooling{filter:saturate(.48)}.skill.cooling>span{opacity:.52}
+.action-pad .jump{border-radius:40% 43% 23% 23%;border-color:#b9b598;background:linear-gradient(145deg,#8db2b3,#476a83 63%,#334b66);box-shadow:0 4px 0 #243a50,inset 0 3px #d9e9d575,inset 0 -5px #24476166,0 5px 8px #142c4055}
+.action-pad .dodge{border-radius:40% 17% 35% 18%;background:linear-gradient(140deg,#93a077,#556b58 66%,#374c4c);transform:rotate(-6deg)}
+.action-pad .dodge .ui-icon{transform:rotate(6deg)}
+#sprint{border-radius:35% 26% 40% 24%;background:linear-gradient(145deg,#b3a274,#79744e 63%,#4a5a4a);color:#fff1c9}
+#sprint[aria-pressed=true]{background:linear-gradient(145deg,#efd491,#bda05d 65%,#858348);color:#334d48;box-shadow:0 3px 0 #4d513a,inset 0 2px #fff3c4,0 0 0 3px #f0d79744,0 0 14px #f0d79766}
+#flight-controls{gap:10px}#flight-controls button{border-radius:18% 18% 37% 37%;border-color:#c3b68c;background:linear-gradient(145deg,#889cac,#496576 64%,#344752)}
+#flight-controls #mount{border-radius:37% 25% 40% 24%;background:linear-gradient(145deg,#b2a879,#727b58 68%,#465748)}
+#flight-controls #mount[aria-pressed=true]{background:linear-gradient(145deg,#eed18d,#b7a26b 65%,#777d55);color:#304a49;box-shadow:0 4px 0 #485744,inset 0 2px #fff1c6,0 0 0 3px #ead8972b}
+#flight-lift{gap:8px}#flight-lift button{border-radius:15% 15% 32% 32%}#flight-lift button:last-child{border-radius:32% 32% 15% 15%}
+.ping{border-radius:28% 45% 30% 45%;background:linear-gradient(145deg,#ac8caf,#675d83 62%,#40485f);border-color:#c7b79b}
+#interact{border:2px solid #6b5534;border-radius:24% 7% 26% 8%;background:radial-gradient(ellipse at 25% 20%,#fff4c3,transparent 55%),linear-gradient(145deg,#e7ca80,#be9555);color:#425649;box-shadow:0 4px 0 #635034,0 0 0 2px #f1d79966,inset 0 2px #fff0bc}
+.game-top-actions{gap:10px}.game-top-actions button{position:relative;border-radius:25% 25% 33% 33%;border-color:#b6a681;background:linear-gradient(150deg,#75897a,#355a55 65%,#28414a);color:#f7e9ba}
+.game-top-actions button:first-child{background:linear-gradient(145deg,#d2b985,#aa925e 65%,#807547);border-color:#e5cea0;color:#344d46}
+.action-pad button:active,#sprint:active,.ping:active,#flight-controls button:active,#flight-controls button.held,#interact:active,.game-top-actions button:active{transform:translateY(3px);filter:brightness(1.12);box-shadow:0 1px 0 #19323c,inset 0 1px 7px #172f3966}
+.action-pad .attack:active{transform:translateY(4px) rotate(-8deg);box-shadow:0 1px 0 #4d382b,inset 0 2px 7px #6b482666,0 0 0 2px #e6cb8a88}
+.action-pad button:focus-visible,#sprint:focus-visible,#flight-controls button:focus-visible,.game-top-actions button:focus-visible{outline:2px solid #fff1b2;outline-offset:4px}
+@media(max-height:650px) and (orientation:landscape){.action-pad:before{width:140px;height:116px;right:12px;top:20px}.action-pad .attack .ui-icon{width:35px;height:35px}.game-top-actions{gap:7px}#flight-controls{gap:8px}.action-pad button:before,#sprint:before,#flight-controls button:before,.game-top-actions button:before{inset:4px}}
+
+@media(max-height:650px) and (orientation:landscape){.flying #flight-controls{left:190px;bottom:32px;right:auto}}
+
+/* Party crest, pinned objective pennant, and short in-world notice ribbons. */
+.player-panel{min-width:248px;padding:9px 16px 10px 8px;gap:12px;color:#fff0c8;background:linear-gradient(110deg,#263f48f5,#254c4aef 62%,#253e49ed);border:2px solid #a59469;border-radius:34px 10px 22px 34px;box-shadow:0 4px 0 #182f38,inset 0 2px #dae6b82b,inset 0 -3px #0b273b66,0 7px 15px #162e4059;isolation:isolate}
+.player-panel:after{content:'';position:absolute;inset:5px 5px 5px 31px;border:1px solid #c6b37c50;border-left:0;border-radius:0 5px 15px 0;z-index:-1;pointer-events:none}
+.player-panel .avatar{flex:none;width:56px;height:59px;margin:-5px 0 -3px -2px;overflow:visible;border:3px solid #dbc080;border-radius:41% 41% 45% 45%;background:radial-gradient(ellipse at 50% 35%,#eee3b4,#a9ad83 56%,#657e70);box-shadow:0 3px 0 #615139,inset 0 0 0 3px #465f5480,0 0 0 2px #39554f;position:relative}
+.player-panel .avatar:after{content:'';position:absolute;left:20px;bottom:-7px;width:10px;height:10px;transform:rotate(45deg);background:#dfc481;border:1px solid #655637;box-shadow:inset 2px 2px #fff0b969}
+.player-panel .avatar img{width:53px;height:58px;object-fit:contain;object-position:50% 12%;filter:drop-shadow(0 2px 1px #39484266)}
+.player-line strong{font-size:15px;letter-spacing:.06em;color:#fff0c9;text-shadow:0 2px #163340}.player-line span{font-size:10px;color:#c0c8af}
+.health{position:relative;width:173px;height:10px;margin:8px 0 6px;overflow:hidden;background:#152d3c;border:1px solid #94885e;border-radius:2px 7px 7px 2px;box-shadow:0 1px #e6d39724,inset 0 2px 3px #0a202a}
+.health i{background:linear-gradient(0deg,#658a46,#a1c876 58%,#cee3a1);border-radius:0;box-shadow:inset 0 1px #f0f8d28a,0 0 6px #b6d987}
+.health:after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 32px,#1c47394d 32px 33px);pointer-events:none}
+.player-panel[data-health=low] .health i{background:linear-gradient(0deg,#ad5747,#e89673 58%,#f9c78d)}
+.partner-line{font-size:10px;color:#d0d2b5}.partner-line #hp-text{font-variant-numeric:tabular-nums;color:#f8e7ba;white-space:nowrap}
+.quest-panel{top:121px;width:238px;padding:14px 15px 14px 23px;border:0;border-radius:2px 9px 20px 3px;background:linear-gradient(95deg,#21453bf5,#2a5145ed 70%,#263e41e8);box-shadow:0 4px 0 #17343870,inset 0 1px #cee0b03b;backdrop-filter:none;clip-path:polygon(0 0,95% 0,100% 7%,100% 93%,93% 100%,0 94%)}
+.quest-panel:before{content:'';position:absolute;left:6px;top:0;bottom:0;width:6px;background:linear-gradient(90deg,#b18a48,#e1c281,#aa874d);box-shadow:2px 0 #0d31365e}
+.quest-panel:after{content:'';position:absolute;right:13px;top:13px;width:7px;height:7px;background:#edc984;transform:rotate(45deg);box-shadow:0 0 0 2px #142f38,0 0 0 3px #c5b47655}
+.quest-panel>span{display:block;font-size:10px;letter-spacing:.1em;color:#d4c697;padding-right:17px}.quest-panel h3{font-size:15px;font-weight:600;line-height:1.5;color:#fff0c8;margin:5px 0 7px;text-shadow:0 1px #173a39}.quest-panel p{font-size:12px;line-height:1.65;color:#d2deca}
+.minimap{border:4px solid #b09a69;box-shadow:0 0 0 2px #244345,0 0 0 4px #d9c58b77,0 5px 10px #1c344b66,inset 0 0 0 2px #f3dea3}.minimap>span{color:#fff0c5;text-shadow:0 1px 3px #163238;font-weight:600}
+#message{color:#f5e7c5;background:linear-gradient(120deg,#3f6259f5,#244b49f5);border:2px solid #ac9766;border-radius:5px 13px 5px 13px;box-shadow:0 4px 0 #19373c,inset 0 2px #eddeb834,0 8px 15px #16384755;padding:12px 15px;gap:12px}
+#message>span{flex:none;width:32px;height:39px;display:grid;place-items:center;background:linear-gradient(#e1c68b,#ac9157);color:#36514b;border-radius:3px 3px 40% 40%;box-shadow:0 2px #132f3566}#message>span .ui-icon{width:24px;height:24px}#message p{font-size:13px;line-height:1.65}#message button{color:#e6d5ab;min-height:44px;min-width:34px}
+#toast{border:0;border-top:1px solid #dac185;border-bottom:2px solid #97865e;background:linear-gradient(90deg,#1d3e43e6,#254c47f5 18%,#254c47f5 82%,#1d3e43e6);border-radius:3px 3px 10px 10px;color:#fff0c7;box-shadow:0 4px #102b3680,inset 0 1px #f5e3ad33;letter-spacing:.025em;padding:11px 25px;font-size:13px}
+#interaction-prompt{background:linear-gradient(100deg,#2b514bfa,#173b44f5);border:1px solid #cfb87e;border-bottom-width:3px;border-radius:2px 10px 2px 10px;box-shadow:0 3px 0 #142f3c99;padding:8px 17px;color:#fff1cd;text-shadow:0 1px #203f3e}
+#flight-status{padding:3px 9px;top:-29px;border-left:3px solid #d9bd76;background:#24474be8;color:#f5e6ba;border-radius:0 5px 5px 0;box-shadow:0 2px #102d3655;font-size:11px}
+.connection-line{padding:4px 10px;background:linear-gradient(90deg,#183d41e6,#214b42b3);border-left:2px solid #bbab70;border-radius:0 4px 4px 0;color:#e0e4c5}
+#boss-panel{padding:8px 14px 7px;background:linear-gradient(90deg,transparent,#3c343bdc 14%,#3c343bdc 86%,transparent);border-top:1px solid #cdab77;border-bottom:1px solid #ac89604d}#boss-panel>div{height:9px;border:1px solid #937452;border-radius:2px;background:#201f2cbf}#boss-health{background:linear-gradient(0deg,#a54c48,#db9674 70%,#f4caa0)}
+#dialogue{border:2px solid #b9a174;border-bottom:4px solid #7e7253;box-shadow:0 4px 0 #183438,0 10px 28px #122f4266;border-radius:8px 20px 8px 20px}#dialogue .dialogue-portrait{border:2px solid #af996a;border-radius:7px 7px 22px 22px;background:radial-gradient(ellipse at center,#eee2be,#bfbd94);box-shadow:0 3px #74795c55}.dialogue-copy>strong{box-shadow:0 3px 0 #172f39;border:1px solid #c8b178}
+@media(max-height:650px) and (orientation:landscape){
+ .player-panel{top:12px;min-width:217px;padding:7px 11px 8px 7px;gap:9px;border-radius:28px 7px 17px 28px}.player-panel .avatar{width:44px;height:48px;border-width:2px}.player-panel .avatar img{width:43px;height:48px}.player-panel .avatar:after{left:15px;width:8px;height:8px;bottom:-6px}.player-line strong{font-size:13px}.player-line span{font-size:9px}.health{width:150px;height:8px;margin:6px 0 5px}.partner-line{font-size:9px}
+ .quest-panel{top:95px;width:217px;max-width:217px;padding:10px 13px 11px 21px}.quest-panel h3{font-size:13px;margin:4px 0 5px}.quest-panel p{font-size:11px;line-height:1.5}.quest-panel>span{font-size:9px}.quest-panel:after{right:11px;top:12px;width:6px;height:6px}
+ #message{top:76px;padding:7px 10px;gap:9px;max-width:40vw}#message p{font-size:11px}#message>span{width:26px;height:32px}#message button{min-width:26px}
+ #toast{max-width:57vw;bottom:11px;font-size:11px;padding:8px 17px}#interaction-prompt{font-size:11px;padding:6px 12px}.connection-line{font-size:8px;padding:3px 7px}#flight-status{font-size:10px;top:-26px}
+ #boss-panel{padding:6px 8px}#boss-panel strong{font-size:12px}
+}
+
+@media(max-height:650px) and (orientation:landscape){#flight-controls{left:190px;bottom:32px;right:auto}}
+
+#weather-status{position:absolute;right:var(--safe-r);top:224px;min-width:126px;padding:6px 9px;text-align:center;border:1px solid #b2a274;border-radius:3px 9px;background:#204748ed;color:#eee5bc;font-size:11px;box-shadow:0 3px #12323b66;font-variant-numeric:tabular-nums;pointer-events:none}
+@media(max-height:650px) and (orientation:landscape){#weather-status{top:162px;min-width:90px;font-size:10px;padding:4px 6px}}
+
+@media(max-height:650px) and (orientation:landscape){#weather-status{top:14px;left:50%;right:auto;transform:translateX(-50%);min-width:0;width:max-content;max-width:150px}#hud:has(#boss-panel:not([hidden])) #weather-status{visibility:hidden}}
+
+/* Keep the useful silhouette and tactile feedback without stacked frames. */
+.action-pad:before,.action-pad button:before,#sprint:before,.ping:before,#flight-controls button:before,.game-top-actions button:before,.player-panel:after,.player-panel .avatar:after{display:none}
+.action-pad button,#sprint,.ping,#flight-controls button,.game-top-actions button{border-width:1px;box-shadow:0 2px 0 #19323c,inset 0 1px #f6e9bf47,0 4px 7px #102a3b35}
+.action-pad .attack{border-width:2px!important;box-shadow:0 3px 0 #4d382b,inset 0 2px #fff7ca80,0 5px 8px #12263355}
+.action-pad .skill,.action-pad .skill-two,.action-pad .jump{border-width:1px;box-shadow:0 2px 0 #203e43,inset 0 1px #f2edce50,0 4px 7px #142c4033}
+.player-panel{border-width:1px;border-radius:8px;background:#254541e8;box-shadow:0 3px 10px #162e4033;min-width:236px;padding:8px 12px;gap:10px}
+.player-panel .avatar{width:48px;height:50px;margin:0;border:1px solid #d4bd84;border-radius:50%;box-shadow:none;background:#a4ae86;overflow:hidden}
+.player-panel .avatar img{width:46px;height:49px}.health{height:7px;border:0;box-shadow:none;border-radius:4px;margin:7px 0 5px}.health:after{display:none}
+.minimap{border-width:2px;box-shadow:0 3px 8px #1c344b55}.quest-panel{width:260px;max-width:260px;padding:0;clip-path:none;border-radius:5px;background:#23493edb;box-shadow:0 3px 8px #1734383d;pointer-events:auto;border:1px solid #d3c29138}
+.quest-panel{z-index:3}.quest-panel:before,.quest-panel:after{display:none}.quest-panel summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;min-height:44px;cursor:pointer;touch-action:manipulation;font-size:12px;line-height:1.6;color:#f7ecd0}
+.quest-panel summary::-webkit-details-marker{display:none}.quest-panel summary>span{min-width:0}.quest-panel summary .ui-icon{width:18px;height:18px;transform:rotate(90deg);transition:transform .15s;opacity:.75}.quest-panel[open] summary .ui-icon{transform:rotate(-90deg)}
+.quest-details{position:relative;padding:9px 46px 11px 12px;border-top:1px solid #d3c29138}.quest-details>span{font-size:10px;color:#c0c9ab}.quest-details h3{font-size:12px;line-height:1.7;margin:4px 0 0;font-weight:500}.quest-details button{position:absolute;right:3px;top:3px;width:44px;height:44px;display:grid;place-items:center;background:none;color:#eddaac}.quest-details button .ui-icon{width:21px;height:21px}
+.exploration-objective{background:#21483bb8}.connection-line{border:0;background:#183d41b8;padding:4px 8px}.game-top-actions button{border-radius:8px}#weather-status{border-color:#b2a27460;box-shadow:none;background:#204748ce}
+@media(max-height:650px) and (orientation:landscape){.player-panel{min-width:211px;border-radius:7px;padding:7px 10px;gap:8px}.player-panel .avatar{width:40px;height:43px}.player-panel .avatar img{width:39px;height:42px}.health{height:6px}.quest-panel{top:88px;width:220px;max-width:220px;padding:0}.quest-panel summary{font-size:11px;padding:8px 10px}.quest-details{padding:8px 45px 9px 10px}.quest-details h3{font-size:11px}}

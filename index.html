@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#193e37" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <title>Two Tails · 和你，一起回家</title>
+  </head>
+  <body>
+    <canvas id="game" aria-label="Two Tails三维游戏场景"></canvas>
+    <div id="app">
+      <div
+        role="status"
+        style="
+          position: fixed;
+          inset: 0;
+          display: grid;
+          place-content: center;
+          text-align: center;
+          background: #23473c;
+          color: #f3e2bb;
+          font-family: serif;
+        "
+      >
+        <div style="font-size: 40px">✧</div>
+        <h2 style="font-weight: 400; letter-spacing: 4px">正在点亮灯火村</h2>
+        <p style="font-size: 12px; opacity: 0.65">
+          首次打开需要载入三维角色，请稍等一阵好风。
+        </p>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

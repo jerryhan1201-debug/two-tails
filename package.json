@@ -1,0 +1,30 @@
+{
+  "name": "two-tails",
+  "version": "0.18.9",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit -p tsconfig.core.json",
+    "test": "node --import tsx --test tests/access.test.ts tests/broom-speed-effects.test.ts tests/camera-ray-index.test.ts tests/home-fixed-light.test.ts tests/home-frame-diagnostics.test.ts tests/material-light-budget.test.ts tests/night-lighting.test.ts tests/render-candidates.test.ts tests/render-resolution.test.ts tests/resource-cost.test.ts tests/weather.test.ts",
+    "test:game": "node --import tsx --test tests/*.test.ts",
+    "dev:game": "vite --host 127.0.0.1",
+    "server:game": "node --import tsx server/local.ts",
+    "build:game": "node tools/check-game-assets.mjs && tsc --noEmit -p tsconfig.json && vite build"
+  },
+  "dependencies": {
+    "@babylonjs/core": "^8.38.0",
+    "@babylonjs/loaders": "^8.38.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^7.1.9",
+    "tsx": "^4.20.6",
+    "@types/node": "^24.7.0",
+    "@types/ws": "^8.18.1",
+    "@cloudflare/workers-types": "4.20251008.0",
+    "wrangler": "4.42.0",
+    "@playwright/test": "^1.56.0"
+  },
+  "license": "MIT"
+}

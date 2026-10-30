@@ -1,0 +1,18 @@
+/** Numeric transport observations only. Never accepts messages, tokens, URLs or save data. */
+export class MetricWindow {
+ private values=new Float64Array(128);private cursor=0;private count=0;
+ add(value:number){if(!Number.isFinite(value)||value<0)return;this.values[this.cursor++%128]=value;this.count=Math.min(128,this.count+1);}
+ summary(){const a=Array.from(this.values.subarray(0,this.count)).sort((a,b)=>a-b);return{samples:a.length,p50:a[Math.floor(a.length*.5)]??0,p95:a[Math.floor(a.length*.95)]??0,max:a.at(-1)??0};}
+}
+export class NetworkMetrics {
+ readonly frame=new MetricWindow();readonly receiveGap=new MetricWindow();readonly inputGap=new MetricWindow();readonly inputReceiveGap=new MetricWindow();readonly serverRtt=new MetricWindow();readonly inputAckRtt=new MetricWindow();
+ started=performance.now();sentMessages=0;receivedMessages=0;sentBytes=0;receivedBytes=0;inputMessages=0;snapshots=0;inputFrames=0;movingFrames=0;longFrames=0;reconnects=0;coalescedSnapshots=0;peakBuffered=0;lastSentSequence=0;lastReceivedSequence=0;lastInputSequence=0;confirmedInputSequence=0;private lastSnapshot=0;private lastInput=0;private lastForwardedInput=0;
+ private awaiting=new Map<number,number>();private pingAt=0;
+ frameSample(ms:number,moving:boolean){this.frame.add(ms);this.inputFrames++;if(moving)this.movingFrames++;if(ms>50)this.longFrames++;}
+ sent(kind:string,bytes:number,seq:number,buffered:number,now=performance.now()){this.sentMessages++;this.sentBytes+=bytes;this.lastSentSequence=seq;this.peakBuffered=Math.max(this.peakBuffered,buffered);if(kind==='input'){this.inputMessages++;if(this.lastInput)this.inputGap.add(now-this.lastInput);this.lastInput=now;}if(kind==='ping')this.pingAt=now;}
+ received(kind:string,bytes:number,seq:number,now=performance.now()){this.receivedMessages++;this.receivedBytes+=bytes;this.lastReceivedSequence=seq;if(kind==='input'){if(this.lastForwardedInput)this.inputReceiveGap.add(now-this.lastForwardedInput);this.lastForwardedInput=now;}if(kind==='snapshot'){this.snapshots++;if(this.lastSnapshot)this.receiveGap.add(now-this.lastSnapshot);this.lastSnapshot=now;}if(kind==='pong'&&this.pingAt){this.serverRtt.add(now-this.pingAt);this.pingAt=0;}}
+ inputSent(seq:number,now=performance.now()){this.lastInputSequence=seq;this.awaiting.set(seq,now);while(this.awaiting.size>128)this.awaiting.delete(this.awaiting.keys().next().value!);}
+ confirm(seq:number,now=performance.now()){if(seq<=this.confirmedInputSequence)return;this.confirmedInputSequence=seq;const at=this.awaiting.get(seq);if(at!==undefined)this.inputAckRtt.add(now-at);for(const n of this.awaiting.keys())if(n<=seq)this.awaiting.delete(n);}
+ resetTransport(){this.awaiting.clear();this.lastInputSequence=this.confirmedInputSequence=0;this.lastInput=this.lastForwardedInput=this.lastSnapshot=this.pingAt=0;}
+ snapshot(buffered=0){return{elapsedMs:Math.round(performance.now()-this.started),sentMessages:this.sentMessages,receivedMessages:this.receivedMessages,sentBytes:this.sentBytes,receivedBytes:this.receivedBytes,inputMessages:this.inputMessages,snapshots:this.snapshots,inputFrames:this.inputFrames,movingFrames:this.movingFrames,longFrames:this.longFrames,reconnects:this.reconnects,coalescedSnapshots:this.coalescedSnapshots,bufferedBytes:buffered,peakBufferedBytes:this.peakBuffered,lastSentSequence:this.lastSentSequence,lastReceivedSequence:this.lastReceivedSequence,lastInputSequence:this.lastInputSequence,confirmedInputSequence:this.confirmedInputSequence,frameMs:this.frame.summary(),snapshotGapMs:this.receiveGap.summary(),inputSendGapMs:this.inputGap.summary(),forwardedInputGapMs:this.inputReceiveGap.summary(),serverPongRttMs:this.serverRtt.summary(),inputToHostAckMs:this.inputAckRtt.summary()};}
+}
